@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var character_sprite = $character_sprite
 @onready var health_bar = $CanvasLayer/health_bar_top
+@onready var character_collision = $player_collision
 
 const SPEED = 2000.0
 var dash_count = 3
@@ -70,6 +71,7 @@ func handle_player_input(delta: float) -> void:
 			velocity.x = SPEED * delta * -5
 		else:
 			velocity.x = SPEED * delta * 5
+	character_collision.disabled = isDashing
 
 func spawn_fireball(delta: float) -> void:
 	var target_position = get_global_mouse_position()

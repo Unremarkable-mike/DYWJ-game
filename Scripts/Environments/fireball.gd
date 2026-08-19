@@ -47,6 +47,7 @@ func fireball_collided(body: Node2D):
 	if body is CharacterBody2D:
 		if body.id == "enemy":
 			stopped = true
+			body.take_damage(10)
 	elif body is not CharacterBody2D:
 		stopped = true
 

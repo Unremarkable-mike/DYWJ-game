@@ -1,15 +1,15 @@
 extends Node2D
 
-var knight: PackedScene
+var samurai: PackedScene
 var spawnTimer = 4
 var counter = 0
 var maxSpawns = 10
-var knight_count = 0
+var samurai_count = 0
 var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	knight = preload("res://Scenes/Characters/knight.tscn")
+	samurai = preload("res://Scenes/Characters/samurai.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -18,9 +18,9 @@ func _process(delta: float) -> void:
 	if player == null:
 		return
 	if counter > spawnTimer:
-		var new_knight = knight.instantiate()
-		new_knight.player = player
-		new_knight.position = position
-		get_parent().add_child(new_knight)
-		knight_count += 1
+		var new_samurai = samurai.instantiate()
+		new_samurai.player = player
+		new_samurai.position = position
+		get_parent().add_child(new_samurai)
+		samurai_count += 1
 		counter = 0

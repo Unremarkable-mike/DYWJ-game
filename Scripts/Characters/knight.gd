@@ -13,9 +13,9 @@ var speed = 1000
 var max_health = 100
 var current_health = 100
 var dead = false
-var loop_count = 1
 var loop_counter = 0
 var max_scale = 0.31
+var healthbar_fade = 2
 
 func _ready() -> void:
 	sprite.animation_looped.connect(death_animation_looped)
@@ -30,6 +30,13 @@ func _physics_process(delta: float) -> void:
 	if dead:
 		sprite.play("Death")
 		return
+	
+	healthbar_fade -= delta
+	if healthbar_fade <= 0:
+		health_bar.visible = false
+		healthbar_fade = 0
+	else:
+		health_bar.visible = true
 	
 	if !inRangeOfAttack:
 		var direction_x = -1
@@ -73,6 +80,7 @@ func update_animation():
 		sprite.play("Run")
 
 func take_damage(damage: float):
+	health_bar.visible = true
 	current_health -= damage
 	current_health = clamp(current_health, 0, max_health)
 	
@@ -82,7 +90,8 @@ func take_damage(damage: float):
 	
 	if current_health == 0:
 		dead = true
-
+	
+	healthbar_fade = 3
 
 func player_entered(body:Node2D):
 	if body is CharacterBody2D and body.id == "player":

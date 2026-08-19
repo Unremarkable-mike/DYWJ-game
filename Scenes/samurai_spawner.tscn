@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dw3wi3xe2dm1j"]
+
+[ext_resource type="Script" uid="uid://cslgjv7n261f6" path="res://Scripts/Environments/samurai_spawner.gd" id="1_1fbrb"]
+
+[node name="samurai_spawner" type="Node2D" unique_id=1698234432]
+script = ExtResource("1_1fbrb")
