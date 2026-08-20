@@ -4,6 +4,7 @@ extends RigidBody2D
 @onready var fireball_sprite = $fireball_area/fireball_animation
 @onready var explosion = $explosion_area/explosion_animation
 @onready var explosion_area = $explosion_area
+@onready var environemt_detection = $environment_detection
 
 var target_position: Vector2
 var fireball_despawn_counter = 4
@@ -12,6 +13,10 @@ var stopped = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	z_index = 1
+	environemt_detection.body_entered.connect(went_behind_an_object)
+	environemt_detection.body_exited.connect(moved_away_from_object)
+	
 	explosion.set_frame_and_progress(0,0)
 	explosion.visible = false
 	explosion.animation_finished.connect(explotion_complete)
@@ -54,3 +59,11 @@ func fireball_collided(body: Node2D):
 func explotion_complete():
 			
 	queue_free()
+
+func went_behind_an_object(body: Node2D):
+	if body is TileMapLayer:
+		z_index = 0
+	
+func moved_away_from_object(body: Node2D):
+	if body is TileMapLayer:
+		z_index = 1

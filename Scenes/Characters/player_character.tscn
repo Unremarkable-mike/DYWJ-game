@@ -474,6 +474,9 @@ animations = [{
 radius = 6.0
 height = 14.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_126ht"]
+radius = 11.0
+
 [node name="Player_character" type="CharacterBody2D" unique_id=889858223]
 script = ExtResource("1_c2rcm")
 
@@ -514,7 +517,7 @@ scale = Vector2(1.145, 1.145)
 alignment = 1
 
 [node name="mana_container" type="Sprite2D" parent="CanvasLayer/BoxContainer" unique_id=230409168]
-modulate = Color(1.1783506, 2.1776273, 3.4579997, 1)
+modulate = Color(1.178, 2.178, 3.458, 1)
 position = Vector2(45.73991, -3.5874424)
 scale = Vector2(2.88, 2.88)
 texture = ExtResource("4_3pywu")
@@ -522,7 +525,15 @@ region_enabled = true
 region_rect = Rect2(86.126434, 105.989845, 78.378174, 33.283867)
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/BoxContainer" unique_id=1677976997]
-modulate = Color(0.51577777, 0.3521504, 0.67152756, 1)
+modulate = Color(0.5176471, 0.3529412, 0.67058825, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 color = Color(0.6085317, 0.23639542, 0.41074112, 1)
+
+[node name="environment_detection" type="Area2D" parent="." unique_id=1562913145]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="environment_detection" unique_id=1689516455]
+position = Vector2(-1, 2)
+shape = SubResource("CircleShape2D_126ht")

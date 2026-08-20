@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var attack_area = $area_of_attack
 @onready var health_bar = $health_bar
 @onready var collision_area = $"samurai_collition area"
+@onready var environemt_detection = $environment_detection
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -21,6 +22,10 @@ var max_scale = 0.31
 var healthbar_fade = 0
 
 func _ready() -> void:
+	z_index = 1
+	environemt_detection.body_entered.connect(went_behind_an_object)
+	environemt_detection.body_exited.connect(moved_away_from_object)
+	
 	sprite.animation_looped.connect(death_animation_looped)
 	attack_area.body_entered.connect(player_entered)
 	attack_area.body_exited.connect(player_exited)
@@ -107,3 +112,12 @@ func death_animation_looped():
 		loop_counter += 1
 		if loop_counter > loop_count:
 			queue_free()
+
+func went_behind_an_object(body: Node2D):
+	if body is TileMapLayer:
+		z_index = 0
+	
+func moved_away_from_object(body: Node2D):
+	if body is TileMapLayer:
+		z_index = 1
+	

@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var health_bar = $CanvasLayer/health_bar_top
 @onready var character_collision = $player_collision
 @onready var mana_bar = $CanvasLayer/BoxContainer
+@onready var environemt_detection = $environment_detection
 
 const SPEED = 2000.0
 const fireball_speed: float = 96
@@ -13,24 +14,40 @@ const max_mana_size: float = 129.148
 const max_mana: float = 100
 const id: String = "player"
 const max_health: float = 100
+const magic_stages: float = 3
+const min_intensity: float = 1
+const max_intensity: float = 18.892
+const mana_growth_multiplier: float = 7
+
 
 var dash_count: float = 3
 var isDashing: bool = false
+var isAlive: bool = true
 var counter: float = 0
 var counter2: float = 0
 var fireball: PackedScene
 var isAttacking: bool = false
 var current_health: float
 var current_mana: float
+var current_intensity
 
 func _ready() -> void:
+	current_intensity = min_intensity
+	z_index = 1
 	current_mana = 5
 	current_health = max_health
-	character_sprite.animation_finished.connect(on_animatiofn_finished)
+	environemt_detection.body_entered.connect(went_behind_an_object)
+	environemt_detection.body_exited.connect(moved_away_from_object)
+	character_sprite.animation_finished.connect(on_animation_finished)
+	character_sprite.animation_looped.connect(on_animation_looped)
 	fireball = preload("res://Scenes/Characters/fireball.tscn")
 
 func _physics_process(delta: float) -> void:
+	if !isAlive:
+		character_sprite.play("Death")
+		return
 	
+	update_mana_bar()
 	handle_player_input(delta)
 	spawn_fireball(delta)
 	update_animation()
@@ -38,7 +55,7 @@ func _physics_process(delta: float) -> void:
 
 func handle_player_input(delta: float) -> void:
 	
-	use_mana(-delta*6)
+	use_mana(-delta*mana_growth_multiplier)
 	#isAttacking = Input.is_key_label_pressed(KEY_Q)
 	isAttacking = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 	
@@ -126,6 +143,8 @@ func take_damage(damage: float):
 	var health_percent = current_health / max_health
 	health_bar.scale.x = health_percent * max_health_scale
 	health_bar.scale.x = clamp(health_bar.scale.x, 0, max_health_scale)
+	if current_health == 0:
+		isAlive = false
 
 func use_mana(amount: float):
 	current_mana -= amount
@@ -134,6 +153,26 @@ func use_mana(amount: float):
 	mana_bar.size.x = mana_percent * max_mana_size
 	mana_bar.size.x = clamp(mana_bar.size.x, 0, max_mana_size)
 
+func update_mana_bar():
+	if current_mana == 100:
+		current_intensity += 3
+		current_intensity = clamp(current_intensity, min_intensity, max_intensity)
+		current_mana = 10
+		mana_bar.modulate = Color(current_intensity,current_intensity,current_intensity)
 
-func on_animatiofn_finished():
+func on_animation_finished():
 	isDashing = false
+	
+func on_animation_looped():
+	if character_sprite.animation == "Death":
+		queue_free()
+
+func went_behind_an_object(body: Node2D):
+	if body is TileMapLayer:
+		body.modulate = Color(1.0, 1.0, 1.0, 0.408)
+		z_index = 0
+	
+func moved_away_from_object(body: Node2D):
+	if body is TileMapLayer:
+		body.modulate = Color(1.0, 1.0, 1.0, 1.0)
+		z_index = 1

@@ -255,6 +255,9 @@ animations = [{
 radius = 14.0
 height = 46.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3d7df"]
+radius = 20.0
+
 [node name="fireball" type="RigidBody2D" unique_id=1843386929]
 script = ExtResource("1_3cvko")
 
@@ -285,3 +288,12 @@ frame_progress = 1.0
 position = Vector2(2, 8)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_d2rsb")
+
+[node name="environment_detection" type="Area2D" parent="." unique_id=970198602]
+position = Vector2(1, 7)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="environment_detection" unique_id=1674169975]
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_3d7df")

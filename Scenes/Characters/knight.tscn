@@ -357,6 +357,9 @@ height = 22.0
 radius = 13.0
 height = 44.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vh0fs"]
+radius = 11.0
+
 [node name="Knight" type="CharacterBody2D" unique_id=545745968]
 script = ExtResource("1_7stuo")
 
@@ -365,7 +368,7 @@ scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_126ht")
 animation = &"Run"
 autoplay = "Idle"
-frame_progress = 0.1877083
+frame_progress = 0.4567926
 
 [node name="knight_collition area" type="CollisionShape2D" parent="." unique_id=1934419025]
 position = Vector2(0, 4)
@@ -385,3 +388,13 @@ region_rect = Rect2(80.66669, 30.333336, 74.66669, 21.333336)
 position = Vector2(0, -2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_d2rsb")
+
+[node name="environment_detection" type="Area2D" parent="." unique_id=725405345]
+position = Vector2(1, 0)
+scale = Vector2(1.0399985, 1.2000002)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="environment_detection" unique_id=1208320041]
+position = Vector2(-1, 2)
+shape = SubResource("CircleShape2D_vh0fs")
