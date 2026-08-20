@@ -3,23 +3,28 @@ extends CharacterBody2D
 @onready var character_sprite = $character_sprite
 @onready var health_bar = $CanvasLayer/health_bar_top
 @onready var character_collision = $player_collision
+@onready var mana_bar = $CanvasLayer/BoxContainer
 
 const SPEED = 2000.0
-var dash_count = 3
-var isDashing = false
-var counter = 0
-var counter2 = 0
-var fireball: PackedScene
-var fireball_speed = 96
-var fireball_timer = 0.5
-var isAttacking = false
-var id = "player"
-var max_health = 100
-var current_health
-var max_scale = 3.315
+const fireball_speed: float = 96
+const fireball_timer: float = 0.5
+const max_health_scale: float = 3.315
+const max_mana_size: float = 129.148
+const max_mana: float = 100
+const id: String = "player"
+const max_health: float = 100
 
+var dash_count: float = 3
+var isDashing: bool = false
+var counter: float = 0
+var counter2: float = 0
+var fireball: PackedScene
+var isAttacking: bool = false
+var current_health: float
+var current_mana: float
 
 func _ready() -> void:
+	current_mana = 5
 	current_health = max_health
 	character_sprite.animation_finished.connect(on_animatiofn_finished)
 	fireball = preload("res://Scenes/Characters/fireball.tscn")
@@ -33,7 +38,8 @@ func _physics_process(delta: float) -> void:
 
 func handle_player_input(delta: float) -> void:
 	
-	isAttacking = Input.is_key_label_pressed(KEY_Q)
+	use_mana(-delta*6)
+	#isAttacking = Input.is_key_label_pressed(KEY_Q)
 	isAttacking = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 	
 	counter += delta * 2
@@ -72,6 +78,7 @@ func handle_player_input(delta: float) -> void:
 		else:
 			velocity.x = SPEED * delta * 5
 	character_collision.disabled = isDashing
+	
 
 func spawn_fireball(delta: float) -> void:
 	var target_position = get_global_mouse_position()
@@ -85,6 +92,7 @@ func spawn_fireball(delta: float) -> void:
 		launch_fireball.position = position
 		launch_fireball.rotate(direction.angle())
 		launch_fireball.linear_velocity = (target_position - position).normalized() * fireball_speed
+		use_mana(2)
 		isAttacking = false
 		counter2 = 0
 
@@ -111,8 +119,16 @@ func take_damage(damage: float):
 	current_health -= damage
 	current_health = clamp(current_health, 0, max_health)
 	var health_percent = current_health / max_health
-	health_bar.scale.x = health_percent * max_scale
-	health_bar.scale.x = clamp(health_bar.scale.x, 0, max_scale)
+	health_bar.scale.x = health_percent * max_health_scale
+	health_bar.scale.x = clamp(health_bar.scale.x, 0, max_health_scale)
+
+func use_mana(amount: float):
+	current_mana -= amount
+	current_mana = clamp(current_mana, 0, max_mana)
+	var mana_percent = current_mana / max_mana
+	mana_bar.size.x = mana_percent * max_mana_size
+	mana_bar.size.x = clamp(mana_bar.size.x, 0, max_mana_size)
+
 
 func on_animatiofn_finished():
 	isDashing = false

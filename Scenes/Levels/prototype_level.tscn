@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bbdk7r1sco117" path="res://Scenes/Characters/samurai.tscn" id="6_5c2hp"]
 [ext_resource type="Texture2D" uid="uid://cthsg4m0n331s" path="res://Assets/Environments/Texture/TX Tileset Wall.png" id="7_l8tfy"]
 [ext_resource type="PackedScene" uid="uid://bkfyty8rdnyh" path="res://Scenes/knight_spawner.tscn" id="12_3iga3"]
+[ext_resource type="PackedScene" uid="uid://dw3wi3xe2dm1j" path="res://Scenes/samurai_spawner.tscn" id="13_l8tfy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_om267"]
 texture = ExtResource("2_5whww")
@@ -1660,3 +1661,6 @@ position = Vector2(293, 202)
 
 [node name="knight_spawner" parent="." unique_id=1708424822 instance=ExtResource("12_3iga3")]
 position = Vector2(249, 153)
+
+[node name="samurai_spawner" parent="." unique_id=1698234432 instance=ExtResource("13_l8tfy")]
+position = Vector2(78, 253)

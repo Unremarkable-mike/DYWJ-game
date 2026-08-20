@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://byhn5b8w4m0ir" path="res://Scripts/Characters/player_character.gd" id="1_c2rcm"]
 [ext_resource type="Texture2D" uid="uid://u6e1tqihdff4" path="res://Assets/Characters/SATYR_sprite_sheet/SPRITE_SHEET.png" id="2_i26gt"]
 [ext_resource type="Texture2D" uid="uid://bo10v01g82ple" path="res://Assets/UI/healthbar.png" id="3_i26gt"]
+[ext_resource type="Texture2D" uid="uid://4tem66gq28e8" path="res://Assets/UI/Mana_bar.png" id="4_3pywu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3pywu"]
 atlas = ExtResource("2_i26gt")
@@ -488,17 +489,40 @@ shape = SubResource("CapsuleShape2D_8hxoa")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2011358866]
 
 [node name="health_bar_bottom" type="Sprite2D" parent="CanvasLayer" unique_id=646853032]
-position = Vector2(197.175, 71.05)
+modulate = Color(0.5525154, 0.5525154, 0.5525154, 1)
+position = Vector2(183.02501, 130.15)
 scale = Vector2(3.315, 3.315)
 texture = ExtResource("3_i26gt")
 region_enabled = true
 region_rect = Rect2(81.333374, 53.66667, 70, 20)
 
 [node name="health_bar_top" type="Sprite2D" parent="CanvasLayer" unique_id=489177117]
-modulate = Color(1.2211305, 1.2211305, 1.2211305, 1)
-position = Vector2(201.99998, 71)
+modulate = Color(0.766682, 0.35270384, 0.2638182, 1)
+position = Vector2(187.84999, 130.1)
 scale = Vector2(3.017, 3.545)
 texture = ExtResource("3_i26gt")
 offset = Vector2(0, 0.37)
 region_enabled = true
 region_rect = Rect2(84.00003, 33, 67.33334, 16)
+
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer" unique_id=1114237282]
+offset_left = 127.0
+offset_top = 73.0
+offset_right = 256.14798
+offset_bottom = 86.45292
+scale = Vector2(1.145, 1.145)
+alignment = 1
+
+[node name="mana_container" type="Sprite2D" parent="CanvasLayer/BoxContainer" unique_id=230409168]
+modulate = Color(1.1783506, 2.1776273, 3.4579997, 1)
+position = Vector2(45.73991, -3.5874424)
+scale = Vector2(2.88, 2.88)
+texture = ExtResource("4_3pywu")
+region_enabled = true
+region_rect = Rect2(86.126434, 105.989845, 78.378174, 33.283867)
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BoxContainer" unique_id=1677976997]
+modulate = Color(0.51577777, 0.3521504, 0.67152756, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.6085317, 0.23639542, 0.41074112, 1)

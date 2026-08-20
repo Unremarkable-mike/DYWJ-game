@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var sprite = $samurai_sprite
 @onready var attack_area = $area_of_attack
 @onready var health_bar = $health_bar
+@onready var collision_area = $"samurai_collition area"
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -17,6 +18,7 @@ var dead = false
 var loop_count = 3
 var loop_counter = 0
 var max_scale = 0.31
+var healthbar_fade = 0
 
 func _ready() -> void:
 	sprite.animation_looped.connect(death_animation_looped)
@@ -28,7 +30,14 @@ func _physics_process(delta: float) -> void:
 		return
 	var target_position = player.position
 	
+	healthbar_fade -= delta
+	
+	if healthbar_fade <= 0:
+		health_bar.visible = false
+		healthbar_fade = 0
+	
 	if dead:
+		collision_area.disabled = true
 		sprite.play("Death")
 		return
 	
@@ -74,17 +83,16 @@ func update_animation():
 		sprite.play("Run")
 
 func take_damage(damage: float):
+	health_bar.visible = true
 	current_health -= damage
 	current_health = clamp(current_health, 0, max_health)
-	
 	if current_health == 0:
 		dead = true
-	
+		
 	var percentage = current_health / max_health
-	
 	health_bar.scale.x = percentage * max_scale
 	health_bar.scale.x = clamp(health_bar.scale.x, 0, max_scale)
-	
+	healthbar_fade = 3
 
 func player_entered(body:Node2D):
 	if body is CharacterBody2D and body.id == "player":

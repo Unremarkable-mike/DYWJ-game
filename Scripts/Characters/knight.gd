@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var sprite = $knight_sprite
 @onready var attack_area = $area_of_attack
 @onready var health_bar = $health_bar
+@onready var collision_area = $"knight_collition area"
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -28,6 +29,7 @@ func _physics_process(delta: float) -> void:
 	var target_position = player.position
 	
 	if dead:
+		collision_area.disabled = true
 		sprite.play("Death")
 		return
 	
@@ -69,7 +71,7 @@ func _physics_process(delta: float) -> void:
 func update_animation():
 	
 	if inRangeOfAttack:
-		sprite.play("Attack")
+		sprite.play("Attack3")
 		return
 	
 	if velocity.x > 0:
@@ -87,10 +89,8 @@ func take_damage(damage: float):
 	var percentage = current_health / max_health
 	health_bar.scale.x = percentage * max_scale
 	health_bar.scale.x = clamp(health_bar.scale.x, 0, max_scale)
-	
 	if current_health == 0:
 		dead = true
-	
 	healthbar_fade = 3
 
 func player_entered(body:Node2D):
