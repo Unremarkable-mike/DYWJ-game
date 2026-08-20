@@ -73,11 +73,16 @@ func handle_player_input(delta: float) -> void:
 			velocity.y = SPEED * delta * 5 * vertical_direction
 		elif vertical_direction:
 			velocity.y = SPEED * delta * 5 * vertical_direction
-		if character_sprite.flip_h:
+		if character_sprite.flip_h and horizontal_direction:
 			velocity.x = SPEED * delta * -5
-		else:
+		elif horizontal_direction:
 			velocity.x = SPEED * delta * 5
-	character_collision.disabled = isDashing
+		
+		collision_layer = 2
+		collision_mask = 2
+	else:
+		collision_layer = 1
+		collision_mask = 1
 	
 
 func spawn_fireball(delta: float) -> void:
