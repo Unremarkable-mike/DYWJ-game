@@ -14,12 +14,11 @@ const max_mana_size: float = 129.148
 const max_mana: float = 100
 const id: String = "player"
 const max_health: float = 100
-const magic_stages: float = 3
 const min_intensity: float = 1
 const max_intensity: float = 18.892
 const mana_growth_multiplier: float = 7
 
-
+var magic_stage: float = 0
 var dash_count: float = 3
 var isDashing: bool = false
 var isAlive: bool = true
@@ -142,9 +141,6 @@ func take_damage(damage: float):
 	current_health = clamp(current_health, 0, max_health)
 	var health_percent = current_health / max_health
 	health_bar.scale.x = health_percent * max_health_scale
-	health_bar.scale.x = clamp(health_bar.scale.x, 0, max_health_scale)
-	if current_health == 0:
-		isAlive = false
 
 func use_mana(amount: float):
 	current_mana -= amount
@@ -159,6 +155,7 @@ func update_mana_bar():
 		current_intensity = clamp(current_intensity, min_intensity, max_intensity)
 		current_mana = 10
 		mana_bar.modulate = Color(current_intensity,current_intensity,current_intensity)
+		magic_stage += 1
 
 func on_animation_finished():
 	isDashing = false

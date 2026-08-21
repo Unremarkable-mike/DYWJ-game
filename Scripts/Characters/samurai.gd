@@ -32,6 +32,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if player == null:
+		sprite.play("Idle")
 		return
 	var target_position = player.position
 	
@@ -86,6 +87,8 @@ func update_animation():
 	elif velocity.x < 0:
 		sprite.flip_h = true
 		sprite.play("Run")
+	else:
+		sprite.play("Idle")
 
 func take_damage(damage: float):
 	health_bar.visible = true

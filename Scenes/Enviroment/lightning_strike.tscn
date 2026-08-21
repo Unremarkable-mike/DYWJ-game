@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://dmnvfnmelpkul"]
+
+[ext_resource type="Script" uid="uid://blthl8cjmlsy4" path="res://Scripts/Environments/lightning_strike.gd" id="1_cqfd3"]
+[ext_resource type="Texture2D" uid="uid://ja2kaa4vkc4y" path="res://Assets/FX/Lightning/lightning_strike_001/lightning_strike_001_large_violet/spritesheet.png" id="1_vqtfv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqfd3"]
+atlas = ExtResource("1_vqtfv")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fllfk"]
+atlas = ExtResource("1_vqtfv")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mi3fa"]
+atlas = ExtResource("1_vqtfv")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aodvt"]
+atlas = ExtResource("1_vqtfv")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv7gi"]
+atlas = ExtResource("1_vqtfv")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vv6qe"]
+atlas = ExtResource("1_vqtfv")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqkqk"]
+atlas = ExtResource("1_vqtfv")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1cg88"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqfd3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fllfk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mi3fa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aodvt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv7gi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vv6qe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gqkqk")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kqle2"]
+radius = 11.0
+height = 40.0
+
+[node name="lightning_strike" type="Area2D" unique_id=1317257861]
+script = ExtResource("1_cqfd3")
+
+[node name="lightning_animation" type="AnimatedSprite2D" parent="." unique_id=1468406925]
+position = Vector2(0, -47)
+sprite_frames = SubResource("SpriteFrames_1cg88")
+frame_progress = 0.76508147
+
+[node name="area_of_effect" type="CollisionShape2D" parent="." unique_id=1399212801]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_kqle2")

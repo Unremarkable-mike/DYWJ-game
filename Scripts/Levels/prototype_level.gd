@@ -5,6 +5,7 @@ extends Node2D
 @onready var player = $Player_character
 @onready var knight_spawner = $knight_spawner
 @onready var samurai_spawner = $samurai_spawner
+@onready var magic = $random_magic_bursts
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,8 +13,11 @@ func _ready() -> void:
 	knight_spawner.player = player
 	knight.player = player
 	samurai.player = player
+	magic.player = player
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	magic.intensity = player.magic_stage
+	magic.player = player
+	

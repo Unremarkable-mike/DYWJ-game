@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dycf7qgo1v17u"]
+
+[ext_resource type="Script" uid="uid://byqrehc143rru" path="res://Scripts/Environments/random_magic_bursts.gd" id="1_a43vg"]
+
+[node name="random_magic_bursts" type="Node2D" unique_id=767190242]
+script = ExtResource("1_a43vg")

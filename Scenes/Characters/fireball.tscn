@@ -246,7 +246,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_eoqog")
 }],
-"loop": 0,
+"loop": 1,
 "name": &"default",
 "speed": 12.0
 }]
@@ -264,6 +264,7 @@ script = ExtResource("1_3cvko")
 [node name="fireball_area" type="Area2D" parent="." unique_id=848433746]
 
 [node name="fireball_animation" type="AnimatedSprite2D" parent="fireball_area" unique_id=1661974185]
+modulate = Color(1.1378646, 0.8547175, 0, 0.7764706)
 position = Vector2(-7, 2)
 scale = Vector2(1.325, 1.325)
 sprite_frames = SubResource("SpriteFrames_126ht")
@@ -278,11 +279,11 @@ shape = SubResource("CircleShape2D_d2rsb")
 [node name="explosion_area" type="Area2D" parent="." unique_id=2004739929]
 
 [node name="explosion_animation" type="AnimatedSprite2D" parent="explosion_area" unique_id=1631346263]
+modulate = Color(1.16, 1.16, 1.16, 1)
 position = Vector2(1, 1)
 scale = Vector2(1.175, 1.175)
 sprite_frames = SubResource("SpriteFrames_d2rsb")
-frame = 17
-frame_progress = 1.0
+frame_progress = 0.6840426
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="explosion_area" unique_id=108605772]
 position = Vector2(2, 8)

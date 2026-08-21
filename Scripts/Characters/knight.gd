@@ -8,15 +8,16 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
-var id = "enemy"
+const id = "enemy"
+const  speed = 1000
+const  max_health = 100
+const max_scale = 0.31
+
 var player: CharacterBody2D
 var inRangeOfAttack = false
-var speed = 1000
-var max_health = 100
 var current_health = 100
 var dead = false
 var loop_counter = 0
-var max_scale = 0.31
 var healthbar_fade = 2
 
 func _ready() -> void:
@@ -30,6 +31,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if player == null:
+		sprite.play("Idle")
 		return
 	var target_position = player.position
 	
@@ -85,6 +87,8 @@ func update_animation():
 	elif velocity.x < 0:
 		sprite.flip_h = true
 		sprite.play("Run")
+	else:
+		sprite.play("Idle")
 
 func take_damage(damage: float):
 	health_bar.visible = true

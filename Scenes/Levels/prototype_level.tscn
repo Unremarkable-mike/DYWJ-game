@@ -11,8 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://0cxdj3b0dof0" path="res://Assets/Environments/Texture/TX Struct.png" id="6_3iga3"]
 [ext_resource type="PackedScene" uid="uid://bbdk7r1sco117" path="res://Scenes/Characters/samurai.tscn" id="6_5c2hp"]
 [ext_resource type="Texture2D" uid="uid://cthsg4m0n331s" path="res://Assets/Environments/Texture/TX Tileset Wall.png" id="7_l8tfy"]
-[ext_resource type="PackedScene" uid="uid://bkfyty8rdnyh" path="res://Scenes/knight_spawner.tscn" id="12_3iga3"]
-[ext_resource type="PackedScene" uid="uid://dw3wi3xe2dm1j" path="res://Scenes/samurai_spawner.tscn" id="13_l8tfy"]
+[ext_resource type="PackedScene" uid="uid://dycf7qgo1v17u" path="res://Scenes/Enviroment/random_magic_bursts.tscn" id="10_a0ybo"]
+[ext_resource type="PackedScene" uid="uid://c6m26it6bm5ws" path="res://Scenes/Enviroment/lightning_burst.tscn" id="11_wyrr3"]
+[ext_resource type="PackedScene" uid="uid://bkfyty8rdnyh" path="res://Scenes/Enviroment/knight_spawner.tscn" id="12_3iga3"]
+[ext_resource type="PackedScene" uid="uid://dw3wi3xe2dm1j" path="res://Scenes/Enviroment/samurai_spawner.tscn" id="13_l8tfy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_om267"]
 texture = ExtResource("2_5whww")
@@ -2073,8 +2075,13 @@ position = Vector2(66, 92)
 zoom = Vector2(4.475, 4.475)
 position_smoothing_enabled = true
 
+[node name="random_magic_bursts" parent="." unique_id=767190242 instance=ExtResource("10_a0ybo")]
+
+[node name="lightning_burst" parent="random_magic_bursts" unique_id=1432866573 instance=ExtResource("11_wyrr3")]
+position = Vector2(0, 1)
+
 [node name="Samurai" parent="." unique_id=416943513 instance=ExtResource("6_5c2hp")]
-position = Vector2(240, 25)
+position = Vector2(234, 27)
 
 [node name="Knight" parent="." unique_id=545745968 instance=ExtResource("5_hg5ae")]
 position = Vector2(256, 280)
