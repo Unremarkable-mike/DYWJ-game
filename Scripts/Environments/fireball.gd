@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 	if explosion.frame == 9:
 		for body in explosion_area.get_overlapping_bodies():
 			if body is CharacterBody2D and body.id == "enemy":
-				body.take_damage(20)
+				body.take_damage(20,"magic")
 		explosion.frame = 10
 	
 	if counter > fireball_despawn_counter:
@@ -52,7 +52,7 @@ func fireball_collided(body: Node2D):
 	if body is CharacterBody2D:
 		if body.id == "enemy":
 			stopped = true
-			body.take_damage(10)
+			body.take_damage(10,"magic")
 	elif body is not CharacterBody2D:
 		stopped = true
 

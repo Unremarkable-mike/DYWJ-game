@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://mx23pdsd2fjd"]
+
+[ext_resource type="Script" uid="uid://c3wkm6b76556" path="res://Scripts/UI/start_menu.gd" id="1_2ybwg"]
+[ext_resource type="Texture2D" uid="uid://bysmsync2sxtj" path="res://Assets/UI/menu_background.png" id="1_8wf1d"]
+[ext_resource type="Texture2D" uid="uid://djpl6ow7g2qro" path="res://Assets/UI/buttons_updated.png" id="2_2ybwg"]
+[ext_resource type="Texture2D" uid="uid://dx0or4e060818" path="res://Assets/UI/logo (2).png" id="3_3kyvb"]
+[ext_resource type="Texture2D" uid="uid://boh5vqf4wn8ex" path="res://Assets/UI/sub_heading.png" id="5_3kyvb"]
+
+[node name="start_menu" type="Control" unique_id=2108059892]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2ybwg")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1222642060]
+modulate = Color(5.761533, 2.5997412, 5.7046013, 0.9882353)
+layout_mode = 0
+offset_left = -5.0
+offset_top = -8.999996
+offset_right = 2279.0
+offset_bottom = 1986.0
+scale = Vector2(0.505, 0.445)
+texture = ExtResource("1_8wf1d")
+
+[node name="play_button" type="Button" parent="." unique_id=1380183068]
+layout_mode = 0
+offset_left = 474.0
+offset_top = 392.0
+offset_right = 651.0
+offset_bottom = 434.0
+scale = Vector2(1.24, 1.24)
+
+[node name="button_sprite" type="Sprite2D" parent="play_button" unique_id=1032024926]
+position = Vector2(88, 19)
+texture = ExtResource("2_2ybwg")
+region_enabled = true
+region_rect = Rect2(15.0000305, 17.666676, 230.00006, 58.87002)
+
+[node name="exit_button" type="Button" parent="." unique_id=1294735206]
+layout_mode = 0
+offset_left = 487.99997
+offset_top = 551.0
+offset_right = 665.0
+offset_bottom = 593.0
+scale = Vector2(1.17, 1.17)
+
+[node name="button_sprite" type="Sprite2D" parent="exit_button" unique_id=270351675]
+position = Vector2(85.608864, 21.402218)
+texture = ExtResource("2_2ybwg")
+region_enabled = true
+region_rect = Rect2(22.333252, 207.50002, 213.33339, 42.370056)
+
+[node name="controls_button" type="Button" parent="." unique_id=354017516]
+layout_mode = 0
+offset_left = 485.00003
+offset_top = 473.00003
+offset_right = 662.0
+offset_bottom = 515.00006
+scale = Vector2(1.165, 1.165)
+
+[node name="button_sprite" type="Sprite2D" parent="controls_button" unique_id=1364253559]
+position = Vector2(87.82293, 20.664232)
+texture = ExtResource("2_2ybwg")
+region_enabled = true
+region_rect = Rect2(22.333252, 121.49999, 214.66673, 42.66668)
+
+[node name="Logo(2)" type="Sprite2D" parent="." unique_id=1286988270]
+position = Vector2(579, 140)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_3kyvb")
+
+[node name="Slogan" type="Sprite2D" parent="." unique_id=435506003]
+modulate = Color(1.9517115, 1.0388136, 1.0102855, 1)
+position = Vector2(585, 302)
+scale = Vector2(1.45, 1.45)
+texture = ExtResource("5_3kyvb")
+region_enabled = true
+region_rect = Rect2(7.9999237, 15.728722, 289.33337, 62.85647)

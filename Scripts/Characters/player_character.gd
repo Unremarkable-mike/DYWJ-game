@@ -29,6 +29,8 @@ var isAttacking: bool = false
 var current_health: float
 var current_mana: float
 var current_intensity
+var kills = 0
+var damage_resistance = 0
 
 func _ready() -> void:
 	current_intensity = min_intensity
@@ -136,11 +138,21 @@ func update_animation():
 	if velocity == Vector2(0,0):
 		character_sprite.play("Idle")
 
-func take_damage(damage: float):
+func take_damage(damage: float,damage_type: String):
+	match damage_type:
+		"magic":
+			damage_resistance = 16
+		"physical":
+			damage_resistance = 2
+	
+	damage -= damage_resistance
 	current_health -= damage
 	current_health = clamp(current_health, 0, max_health)
 	var health_percent = current_health / max_health
 	health_bar.scale.x = health_percent * max_health_scale
+
+func update_kills():
+	kills += 1
 
 func use_mana(amount: float):
 	current_mana -= amount

@@ -6,21 +6,27 @@ extends CharacterBody2D
 @onready var collision_area = $"knight_collition area"
 @onready var environemt_detection = $environment_detection
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-const id = "enemy"
-const  speed = 1000
-const  max_health = 100
-const max_scale = 0.31
+const SPEED: float = 300.0
+const JUMP_VELOCITY: float = -400.0
+const id: String = "enemy"
+const speed: float = 1000
+const max_health: float = 100
+const max_scale: float = 0.31
+const damage: float = 3
 
 var player: CharacterBody2D
-var inRangeOfAttack = false
-var current_health = 100
-var dead = false
-var loop_counter = 0
-var healthbar_fade = 2
+var inRangeOfAttack: bool = false
+var current_health: float = 100
+var dead: bool = false
+var loop_counter: int = 0
+var healthbar_fade: float = 2
+var isMoving: bool = true
+var last_position: Vector2
+var rest_cooldown = 0.5
+var rest_counter = 0
 
 func _ready() -> void:
+	last_position = Vector2(0,0)
 	z_index = 1
 	environemt_detection.body_entered.connect(went_behind_an_object)
 	environemt_detection.body_exited.connect(moved_away_from_object)
@@ -33,12 +39,25 @@ func _physics_process(delta: float) -> void:
 	if player == null:
 		sprite.play("Idle")
 		return
+	rest_counter += delta
 	var target_position = player.position
 	
 	if dead:
 		collision_area.disabled = true
 		sprite.play("Death")
 		return
+	var x = round(last_position.x) == round(position.x)
+	var y = round(last_position.y) == round(position.y)
+	
+	var timer_complete = rest_counter > rest_cooldown
+	
+	if x and y and timer_complete:
+		isMoving = false
+	elif timer_complete: isMoving = true
+	
+	if timer_complete:
+		last_position = position
+		rest_counter = 0
 	
 	healthbar_fade -= delta
 	if healthbar_fade <= 0:
@@ -69,11 +88,12 @@ func _physics_process(delta: float) -> void:
 		if sprite.frame == 4:
 			for body in attack_area.get_overlapping_bodies():
 				if body is CharacterBody2D and body.id == "player":
-					body.take_damage(5)
+					body.take_damage(damage,"physical")
 		velocity.x = 0
 		velocity.y = 0
 	update_animation()
 	move_and_slide()
+
 
 func update_animation():
 	
@@ -81,16 +101,16 @@ func update_animation():
 		sprite.play("Attack3")
 		return
 	
-	if velocity.x > 0:
+	if velocity.x > 0 and isMoving:
 		sprite.flip_h = false
 		sprite.play("Run")
-	elif velocity.x < 0:
+	elif velocity.x < 0 and isMoving:
 		sprite.flip_h = true
 		sprite.play("Run")
 	else:
 		sprite.play("Idle")
 
-func take_damage(damage: float):
+func take_damage(damage: float, damage_type: String):
 	health_bar.visible = true
 	current_health -= damage
 	current_health = clamp(current_health, 0, max_health)
@@ -112,6 +132,7 @@ func player_exited(body:Node2D):
 
 func death_animation_looped():
 	if sprite.animation == "Death":
+		player.update_kills()
 		queue_free()
 
 func went_behind_an_object(body: Node2D):

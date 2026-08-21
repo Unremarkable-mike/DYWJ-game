@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bu83i7rrcwahr"]
+
+[ext_resource type="Script" uid="uid://df4v7s07k67la" path="res://Scripts/game_manager.gd" id="1_oj352"]
+
+[node name="game_manager" type="Node2D" unique_id=1818945866]
+script = ExtResource("1_oj352")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1346654055]
+visible = false
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.16206557, 0.1620656, 0.16206557, 1)

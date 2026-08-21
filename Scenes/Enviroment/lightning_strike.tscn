@@ -70,7 +70,8 @@ script = ExtResource("1_cqfd3")
 [node name="lightning_animation" type="AnimatedSprite2D" parent="." unique_id=1468406925]
 position = Vector2(0, -47)
 sprite_frames = SubResource("SpriteFrames_1cg88")
-frame_progress = 0.76508147
+autoplay = "default"
+frame_progress = 0.045388706
 
 [node name="area_of_effect" type="CollisionShape2D" parent="." unique_id=1399212801]
 rotation = 1.5707964

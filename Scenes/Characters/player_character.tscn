@@ -492,7 +492,7 @@ shape = SubResource("CapsuleShape2D_8hxoa")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2011358866]
 
 [node name="health_bar_bottom" type="Sprite2D" parent="CanvasLayer" unique_id=646853032]
-modulate = Color(0.5525154, 0.5525154, 0.5525154, 1)
+modulate = Color(0.38431373, 0.38431373, 0.38431373, 0.87058824)
 position = Vector2(183.02501, 130.15)
 scale = Vector2(3.315, 3.315)
 texture = ExtResource("3_i26gt")
@@ -500,7 +500,7 @@ region_enabled = true
 region_rect = Rect2(81.333374, 53.66667, 70, 20)
 
 [node name="health_bar_top" type="Sprite2D" parent="CanvasLayer" unique_id=489177117]
-modulate = Color(0.766682, 0.35270384, 0.2638182, 1)
+modulate = Color(0.76862746, 0.3529412, 0.2627451, 0.8117647)
 position = Vector2(187.84999, 130.1)
 scale = Vector2(3.017, 3.545)
 texture = ExtResource("3_i26gt")
@@ -518,6 +518,7 @@ alignment = 1
 
 [node name="mana_container" type="Sprite2D" parent="CanvasLayer/BoxContainer" unique_id=230409168]
 modulate = Color(1.178, 2.178, 3.458, 1)
+self_modulate = Color(1.0991465, 1.0991465, 1.0991465, 1)
 position = Vector2(45.73991, -3.5874424)
 scale = Vector2(2.88, 2.88)
 texture = ExtResource("4_3pywu")

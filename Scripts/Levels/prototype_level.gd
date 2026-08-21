@@ -6,6 +6,9 @@ extends Node2D
 @onready var knight_spawner = $knight_spawner
 @onready var samurai_spawner = $samurai_spawner
 @onready var magic = $random_magic_bursts
+@onready var kill_count_label = $CanvasLayer/Label
+
+var kill_count = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,4 +23,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	magic.intensity = player.magic_stage
 	magic.player = player
+	kill_count = player.kills
+	kill_count_label.text = str(kill_count)
 	

@@ -26,6 +26,8 @@ func _process(delta: float) -> void:
 			spawn_cooldown = 2
 		3.0: 
 			spawn_cooldown = 1
+		4.0:
+			spawn_cooldown = 0.5
 	summon_magic(delta)
 	
 
@@ -35,7 +37,7 @@ func summon_magic(delta: float):
 	var distance_y = randf_range(player.position.y - max_distance_y, player.position.y + max_distance_y)
 	
 	if spawn_timer > spawn_cooldown:
-		print("child not creating")
+
 		var magic_blast1 = lightning_burst.instantiate()
 		get_parent().add_child(magic_blast1)
 		spawn_timer = 0

@@ -9,11 +9,13 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
-var id = "enemy"
+const id = "enemy"
+const speed = 1300
+const max_health = 100
+const damage: float = 3
+
 var player: CharacterBody2D
 var inRangeOfAttack = false
-var speed = 1300
-var max_health = 100
 var current_health = 100
 var dead = false
 var loop_count = 3
@@ -29,15 +31,15 @@ func _ready() -> void:
 	sprite.animation_looped.connect(death_animation_looped)
 	attack_area.body_entered.connect(player_entered)
 	attack_area.body_exited.connect(player_exited)
-
+	
 func _physics_process(delta: float) -> void:
 	if player == null:
 		sprite.play("Idle")
 		return
 	var target_position = player.position
-	
+		
 	healthbar_fade -= delta
-	
+		
 	if healthbar_fade <= 0:
 		health_bar.visible = false
 		healthbar_fade = 0
@@ -69,12 +71,12 @@ func _physics_process(delta: float) -> void:
 		if sprite.frame == 4:
 			for body in attack_area.get_overlapping_bodies():
 				if body is CharacterBody2D and body.id == "player":
-					body.take_damage(5)
+					body.take_damage(damage,"physical")
 		velocity.x = 0
 		velocity.y = 0
 	update_animation()
 	move_and_slide()
-
+	
 func update_animation():
 	
 	if inRangeOfAttack:
@@ -89,8 +91,9 @@ func update_animation():
 		sprite.play("Run")
 	else:
 		sprite.play("Idle")
-
-func take_damage(damage: float):
+	
+func take_damage(damage: float, damage_type:String):
+	damage_type = "none"
 	health_bar.visible = true
 	current_health -= damage
 	current_health = clamp(current_health, 0, max_health)
@@ -101,7 +104,7 @@ func take_damage(damage: float):
 	health_bar.scale.x = percentage * max_scale
 	health_bar.scale.x = clamp(health_bar.scale.x, 0, max_scale)
 	healthbar_fade = 3
-
+	
 func player_entered(body:Node2D):
 	if body is CharacterBody2D and body.id == "player":
 		inRangeOfAttack = true
@@ -109,13 +112,14 @@ func player_entered(body:Node2D):
 func player_exited(body:Node2D):
 	if body is CharacterBody2D and body.id == "player":
 		inRangeOfAttack = false
-
+	
 func death_animation_looped():
 	if sprite.animation == "Death":
 		loop_counter += 1
 		if loop_counter > loop_count:
+			player.update_kills()
 			queue_free()
-
+	
 func went_behind_an_object(body: Node2D):
 	if body is TileMapLayer:
 		z_index = 0

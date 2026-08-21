@@ -213,7 +213,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d2rsb"]
-radius = 15.0
+radius = 19.026299
 
 [node name="lightning_burst" type="Area2D" unique_id=1432866573]
 modulate = Color(1.8633137, 0.7926241, 0.5985036, 1)
@@ -222,12 +222,11 @@ script = ExtResource("1_cnohq")
 
 [node name="lightning_animation" type="AnimatedSprite2D" parent="." unique_id=882419995]
 modulate = Color(5.92768e-06, 2.0577874, 2.1728387, 1)
-scale = Vector2(0.415, 0.415)
+scale = Vector2(0.675, 0.675)
 sprite_frames = SubResource("SpriteFrames_126ht")
 animation = &"burst_3"
 autoplay = "burst_1"
-frame_progress = 0.90139943
+frame_progress = 0.81946194
 
 [node name="area_of_effect" type="CollisionShape2D" parent="." unique_id=1187979764]
-visible = false
 shape = SubResource("CircleShape2D_d2rsb")
